@@ -70,9 +70,17 @@ body.scrolled h1 {
             bottom: 2.5vh;
             left: 12px;
             right: 12px;
+            color: white;
+            letter-spacing: 2px;
         }
         #task-input:focus-visible {
           outline: none;
+        }
+        #task-input::placeholder {
+            font-style: normal;
+            font-weight: normal;
+            letter-spacing: 1px;
+
         }
 
         button {
@@ -85,6 +93,16 @@ body.scrolled h1 {
             height: 2rem;
             width: 50vw;
         }
+        button:focus {
+            animation: focus-btn .25s ease-in-out;
+        }
+
+
+@keyframes focus-btn {
+    0% {background-color: #fd9d1b;}
+    50% {background-color: #fd9f1bb2;}
+    100% {background-color: #fd9d1b;}
+}
 
         ul {
             list-style: none;
@@ -96,23 +114,51 @@ body.scrolled h1 {
             display: flex;
             align-items: center;
         }
+span {
+    position: relative;
+}
+
+
+        span::after {
+            content: '';
+            z-index: 9;
+            background-color: #1c1d1f;
+            position: absolute;
+            translate: -100%;
+            width: 100%;
+            height: 100%;
+            animation: new 1s ease-in-out forwards;
+        }
 
         input[type="checkbox"] {
             margin-right: 10px;
+            accent-color: #017aff;
         }
 
         .complete {
             text-decoration: line-through;
+            animation: complete .25s forwards;
         }
 
         @keyframes completeAnimation {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
+            0% { opacity: 0;}
+            100% { opacity: 1;}
+        }
+        @keyframes new {
+            0% {opacity: 1; width: 100%;}
+            50% {width: 0;}
+            75% {opacity: 0.5;}
+            100% {opacity: 0; width: 0;}
+        }
+        @keyframes complete {
+            0% {opacity: 1;}
+            100% {opacity: .25;}
         }
         #complete-msg {
             display: none;
             font-weight: bold;
-            animation: completeAnimation 1s forwards;
+            animation: completeAnimation .25s forwards;
+            text-align: center;
         }
 
         .btn-group {
