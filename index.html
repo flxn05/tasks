@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
 
       :root {
@@ -91,10 +92,17 @@ body.scrolled h1 {
             font-weight: bold;
             border-radius: 10px;
             height: 2rem;
-            width: 50vw;
+            width: 33vw;
         }
         button:focus {
             animation: focus-btn .25s ease-in-out;
+        }
+        .date-input {
+            width: 33vw;
+            border-radius: 10px;
+            background-color: #fd881b;
+            color: white;
+            border: none;
         }
 
 
@@ -171,6 +179,26 @@ span {
             right: 12px;
         }
     </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(function(reg) {
+                    console.log('Service Worker Registered!', reg);
+                })
+                .catch(function(err) {
+                    console.log('Service Worker registration failed: ', err);
+                });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
+    loadTasks(); // Load saved tasks
+});
+
+    </script>
 </head>
 <body>
 
@@ -179,6 +207,7 @@ span {
     <input type="text" id="task-input" placeholder="Add a task...">
     <div class="btn-group">
         <button id="add-btn">Add Task</button>
+        <input type="datetime-local" id="task-time" class="date-input" placeholder="Set time for notification">
         <button id="delete-all-btn">Delete All</button>
     </div>
     <ul id="task-list"></ul>
@@ -288,5 +317,50 @@ function addTask() {
 
 </script>
 
+<script>
+    addBtn.addEventListener('click', addTask);
+
+function addTask() {
+    const taskText = taskInput.value.trim();
+    const taskTime = document.getElementById('task-time').value;
+
+    if (taskText === '' || taskTime === '') return;
+
+    createTaskElement(taskText, false);
+
+    const notificationTime = new Date(taskTime).getTime() - Date.now();
+    
+    // Schedule the notification
+    if (notificationTime > 0) {
+        setTimeout(() => {
+            sendNotification(taskText);
+        }, notificationTime);
+    }
+
+    saveTasks();
+    taskInput.value = '';
+    document.getElementById('task-time').value = ''; // Clear input
+}
+
+// Request Notification permission and show notification
+function sendNotification(task) {
+    if (Notification.permission === 'granted') {
+        navigator.serviceWorker.ready.then(function(registration) {
+            registration.showNotification('Task Reminder', {
+                body: `Don't forget: ${task}`,
+                icon: 'icon.png',
+                badge: 'badge.png'
+            });
+        });
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                sendNotification(task);
+            }
+        });
+    }
+}
+
+</script>
 </body>
 </html>
