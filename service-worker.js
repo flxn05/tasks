@@ -10,8 +10,8 @@ self.addEventListener('push', function(event) {
   const data = event.data.json();
   const options = {
       body: data.body,
-      icon: 'icon.png', // You can provide your custom icon
-      badge: 'badge.png', // You can provide a badge image
+      icon: 'checked.png', // You can provide your custom icon
+      badge: 'checked.png', // You can provide a badge image
   };
 
   event.waitUntil(
