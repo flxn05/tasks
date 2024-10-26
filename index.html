@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <title>To Do List</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="checked.png">
@@ -32,13 +32,13 @@
         h1 {
             margin-bottom: 14vh;
             margin-top: 14vh;
-            color: #fd9d1b;
+            color: red;
             font-size: 2.5rem;
             position: sticky;
             top: 0;
             text-align: center;
             transition: all 0.3s ease;
-            background-color: #1c1d1fad;
+            background-color: transparent;
             backdrop-filter: saturate(2) blur(16px);
             width: calc(100vw+40px);
             translate: 0px;
@@ -51,7 +51,8 @@ body.scrolled h1 {
     translate: 0px;
     padding-left: 12px;
     width: calc(100vw+40px);
-    backdrop-filter: saturate(2) blur(12px);
+    background-image: radial-gradient(rgba(90, 1, 1, 0.26), transparent);
+    backdrop-filter: saturate(2) blur(16px) brightness(.5);
     padding-top: 4vh;
     z-index: 999;
 }
@@ -67,7 +68,7 @@ body.scrolled h1 {
 }
         #task-input {
             padding: 8px;
-            width: 90%;
+            width: 88%;
             height: 1rem;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -80,6 +81,14 @@ body.scrolled h1 {
             color: white;
             letter-spacing: 2px;
             z-index: 9;
+            translate: 2%;
+            transition: all .25s ease;
+        }
+        #task-input:focus {
+            width: 92%;
+            height: 1.5rem;
+            translate: 0;
+            filter: brightness(2);
         }
         #task-input:focus-visible {
           outline: none;
@@ -93,7 +102,7 @@ body.scrolled h1 {
 
         button {
             padding: 8px;
-            background-color: #fd9d1b;
+            background-color: red;
             border: none;
             color: white;
             font-weight: bold;
@@ -107,16 +116,16 @@ body.scrolled h1 {
         .date-input {
             width: 33vw;
             border-radius: 10px;
-            background-color: #fd881b;
+            background-color: red;
             color: white;
             border: none;
         }
 
 
 @keyframes focus-btn {
-    0% {background-color: #fd9d1b;}
-    50% {background-color: #fd9f1bb2;}
-    100% {background-color: #fd9d1b;}
+    0% {background-color: red;}
+    50% {background-color: darkred}
+    100% {background-color: red;}
 }
 
         ul {
@@ -125,12 +134,13 @@ body.scrolled h1 {
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
         }
 span {
     position: relative;
+    margin-left: 6px;
 }
 
 
@@ -147,7 +157,9 @@ span {
 
         input[type="checkbox"] {
             margin-right: 10px;
-            accent-color: #017aff;
+            accent-color: darkred;
+            transform: scale(2.25);
+            margin-left: 1rem;
         }
 
         .complete {
@@ -167,7 +179,7 @@ span {
         }
         @keyframes complete {
             0% {opacity: 1;}
-            100% {opacity: .25;}
+            100% {opacity: .25; transform: scale(.9);}
         }
         #complete-msg {
             display: none;
@@ -185,6 +197,9 @@ span {
             left: 12px;
             right: 12px;
             z-index: 9;
+        }
+        .btn-group * {
+            width: 50vw;
         }
     </style>
     <script>
@@ -215,7 +230,7 @@ span {
     <input type="text" id="task-input" placeholder="Add a task...">
     <div class="btn-group">
         <button id="add-btn">Add Task</button>
-        <input type="datetime-local" id="task-time" class="date-input" placeholder="Set time for notification">
+        <!--<input type="datetime-local" id="task-time" class="date-input" placeholder="Set time for notification">-->
         <button id="delete-all-btn">Delete All</button>
     </div>
     <ul id="task-list"></ul>
