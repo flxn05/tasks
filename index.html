@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>To Do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Tasks</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="checked.png">
     <style>
@@ -69,7 +69,7 @@ body.scrolled h1 {
         #task-input {
             padding: 8px;
             width: 88%;
-            height: 1rem;
+            height: 2rem;
             border-radius: 10px;
             margin-bottom: 10px;
             border: solid 1px #b6b6b6;
@@ -83,10 +83,11 @@ body.scrolled h1 {
             z-index: 9;
             translate: 2%;
             transition: all .25s ease;
+            font-size: 1.2rem;
         }
         #task-input:focus {
             width: 92%;
-            height: 1.5rem;
+            height: 2.5rem;
             translate: 0;
             filter: brightness(2);
         }
@@ -106,8 +107,9 @@ body.scrolled h1 {
             border: none;
             color: white;
             font-weight: bold;
-            border-radius: 10px;
-            height: 2rem;
+            font-size: 1.5rem;
+            border-radius: 16px;
+            height: 3.5rem;
             width: 33vw;
         }
         button:focus {
@@ -141,6 +143,7 @@ body.scrolled h1 {
 span {
     position: relative;
     margin-left: 6px;
+    font-size: 1.5rem;
 }
 
 
@@ -193,7 +196,7 @@ span {
             justify-content: center;
             gap: 12px;
             position: fixed;
-            bottom: 10vh;
+            bottom: 12vh;
             left: 12px;
             right: 12px;
             z-index: 9;
