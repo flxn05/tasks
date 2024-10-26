@@ -40,16 +40,18 @@
             transition: all 0.3s ease;
             background-color: #1c1d1fad;
             backdrop-filter: saturate(2) blur(16px);
+            width: calc(100vw+40px);
+            translate: 0px;
 
         }
 
 body.scrolled h1 {
     font-size: 1.5rem;
     padding-block: 1rem;
-    translate: -20px;
+    translate: 0px;
     padding-left: 12px;
-    width: 100vw;
-    backdrop-filter: saturate(2) blur(16px);
+    width: calc(100vw+40px);
+    backdrop-filter: saturate(2) blur(12px);
     padding-top: 4vh;
     z-index: 999;
 }
@@ -232,13 +234,15 @@ span {
         taskList.addEventListener('change', checkTasks);
 
         // Load tasks from localStorage
-        function loadTasks() {
-            const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            storedTasks.forEach(task => {
-                createTaskElement(task.text, task.completed);
-            });
-            checkTasks();  // Recheck the tasks to see if all are completed
-        }
+function loadTasks() {
+    taskList.innerHTML = '';  // Clear the task list before loading
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    storedTasks.forEach(task => {
+        createTaskElement(task.text, task.completed);
+    });
+    checkTasks();  // Recheck the tasks to see if all are completed
+}
+
 
         // Save tasks to localStorage
         function saveTasks() {
