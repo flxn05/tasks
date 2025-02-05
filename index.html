@@ -12,261 +12,240 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
         overflow-y: scroll;
       }
-        body {
-            margin: 0;
-            padding: 20px;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: left;
-            background-color: #1c1d1f;
-            color: #eaeaea;
-            padding-bottom: 18vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            width: 100%;
-            word-wrap: break-word;
-            word-break: break-all;
-            white-space: normal;
-        }
 
-        h1 {
-            margin-bottom: 14vh;
-            margin-top: 14vh;
-            color: red;
-            font-size: 2.5rem;
-            position: sticky;
-            top: 0;
-            text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: saturate(2) blur(16px);
-            width: calc(100vw+40px);
-            translate: 0px;
+      body {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: #1c1d1f;
+          color: #eaeaea;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          width: 100%;
+          word-wrap: break-word;
+          word-break: break-all;
+          white-space: normal;
+          min-height: 100vh;
+      }
 
-        }
+      h1 {
+          margin-bottom: 14vh;
+          margin-top: 14vh;
+          color: red;
+          font-size: 2.5rem;
+          position: sticky;
+          top: 0;
+          text-align: center;
+          transition: all 0.3s ease;
+          backdrop-filter: saturate(2) blur(16px);
+          width: 100%;
+      }
 
-body {
-    padding: 0;
-}
+      body.scrolled h1 {
+          font-size: 1.5rem;
+          padding-top: 4vh;
+          background-image: radial-gradient(rgba(1, 32, 90, 0.26), transparent);
+          backdrop-filter: saturate(2) blur(16px) brightness(.5);
+          padding-block: 1rem;
+      }
 
-body.scrolled h1 {
-    font-size: 1.5rem;
-    padding-block: 1rem;
-    translate: 0px;
-    padding-left: 12px;
-    width: calc(100vw+40px);
-    background-image: radial-gradient(rgba(1, 32, 90, 0.26), transparent);
-    backdrop-filter: saturate(2) blur(16px) brightness(.5);
-    padding-top: 4vh;
-    z-index: 999;
-}
+      .bg {
+          background-image: linear-gradient(0deg, #1c1d1f, #1c1d1f, transparent);
+          position: fixed;
+          bottom: 0;
+          height: 24vh;
+          left: 0;
+          right: 0;
+          z-index: 8;
+      }
 
-.bg {
-  background-image: linear-gradient(0deg, #1c1d1f, #1c1d1f, transparent);
-  position: fixed;
-  bottom: 0;
-  height: 24vh;
-  left: 0;
-  right: 0;
-  z-index: 8;
-}
-        #task-input {
-            padding: 8px;
-            width: 88%;
-            height: 2rem;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: solid 1px #b6b6b6;
-            background-color: #1c1d1f;
-            position: fixed;
-            bottom: 2.5vh;
-            left: 12px;
-            right: 12px;
-            color: white;
-            letter-spacing: 2px;
-            z-index: 9;
-            translate: 2%;
-            transition: all .25s ease;
-            font-size: 1.2rem;
-        }
-        #task-input:focus {
-            width: 92%;
-            height: 2.5rem;
-            translate: 0;
-            filter: brightness(2);
-        }
-        #task-input:focus-visible {
-          outline: none;
-        }
-        #task-input::placeholder {
-            font-style: normal;
-            font-weight: normal;
-            letter-spacing: 1px;
+      #task-input {
+          padding: 8px;
+          width: 88%;
+          height: 2rem;
+          border-radius: 10px;
+          margin-bottom: 10px;
+          border: solid 1px #b6b6b6;
+          background-color: #1c1d1f;
+          position: fixed;
+          bottom: 6vh;
+          left: 12px;
+          right: 12px;
+          color: white;
+          letter-spacing: 2px;
+          z-index: 9;
+          font-size: 1.2rem;
+          transition: all .25s ease;
+      }
 
-        }
+      #task-input:focus {
+          width: 92%;
+          height: 2.5rem;
+          filter: brightness(2);
+      }
 
-        button {
-            padding: 8px;
-            background-color: red;
-            border: none;
-            color: white;
-            font-weight: bold;
-            font-size: 1.25rem;
-            border-radius: 16px;
-            height: 3rem;
-            width: 33vw;
-        }
-        button:focus {
-            animation: focus-btn .25s ease-in-out;
-        }
-        .date-input {
-            width: 33vw;
-            border-radius: 10px;
-            background-color: red;
-            color: white;
-            border: none;
-        }
+      #task-input::placeholder {
+          font-weight: normal;
+          letter-spacing: 1px;
+      }
 
+      button {
+          padding: 8px;
+          background-color: red;
+          border: none;
+          color: white;
+          font-weight: bold;
+          font-size: 1.25rem;
+          border-radius: 16px;
+          height: 3rem;
+          width: 33vw;
+      }
 
-@keyframes focus-btn {
-    0% {background-color: red;}
-    50% {background-color: darkred}
-    100% {background-color: red;}
-}
+      .btn-group {
+        
+          display: flex;
+          justify-content: center;
+          gap: 2px;
+          position: fixed;
+          bottom: 16vh;
+          left: 12px;
+          right: 12px;
+          z-index: 9;
+      }
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+      ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          margin-top: 4vh;
+      }
 
-        li {
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-        }
-span {
-    position: relative;
-    margin-left: 6px;
-    font-size: 1.25rem;
-}
+      li {
+          margin-bottom: 24px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
 
+      span {
+          margin-left: 6px;
+          font-size: 1.25rem;
+          cursor: pointer;
+      }
 
-        span::after {
-            content: '';
-            z-index: 9;
-            background-color: #1c1d1f;
-            position: absolute;
-            translate: -100%;
-            width: 100%;
-            height: 100%;
-            animation: new .75s ease-in-out forwards;
-        }
+      span.complete {
+          text-decoration: line-through;
+      }
 
-        input[type="checkbox"] {
-            margin-right: 10px;
-            accent-color: darkred;
-            transform: scale(2.25);
-            margin-left: 1rem;
-        }
+      input[type="checkbox"] {
+          margin-right: 10px;
+          accent-color: darkred;
+          transform: scale(2.25);
+      }
 
-        .complete {
-            text-decoration: line-through;
-            animation: complete .25s forwards;
-        }
+      .task-delete-btn {
+          background-color: transparent;
+          border: none;
+          color: red;
+          font-size: 1.2rem;
+          cursor: pointer;
+      }
 
-        @keyframes completeAnimation {
-            0% { opacity: 0;}
-            100% { opacity: 1;}
-        }
-        @keyframes new {
-            0% {opacity: 1; width: 100%;}
-            50% {width: 0;}
-            75% {opacity: 0.5;}
-            100% {opacity: 0; width: 0;}
-        }
-        @keyframes complete {
-            0% {opacity: 1;}
-            100% {opacity: .25; transform: scale(.9);}
-        }
-        #complete-msg {
-            display: none;
-            font-weight: bold;
-            animation: completeAnimation .25s forwards;
-            text-align: center;
-        }
+      .task-delete-btn:hover {
+          color: darkred;
+      }
 
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            position: fixed;
-            bottom: 12vh;
-            left: 12px;
-            right: 12px;
-            z-index: 9;
-        }
-        .btn-group * {
-            width: 50vw;
-        }
+      .confirm-delete {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+      }
+
+      .confirm-delete div {
+          background-color: #2c2f36;
+          padding: 2rem;
+          border-radius: 10px;
+          text-align: center;
+          color: white;
+      }
+
+      .confirm-delete button {
+          padding: 10px;
+          margin-top: 1rem;
+          font-size: 1rem;
+          border-radius: 10px;
+          background-color: red;
+          color: white;
+          border: none;
+      }
+
+      .confirm-delete button:hover {
+          background-color: darkred;
+      }
     </style>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-                .then(function(reg) {
-                    console.log('Service Worker Registered!', reg);
-                })
-                .catch(function(err) {
-                    console.log('Service Worker registration failed: ', err);
-                });
-        }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    if (Notification.permission !== 'granted') {
-        Notification.requestPermission();
-    }
-    loadTasks(); // Load saved tasks
-});
-
-    </script>
 </head>
 <body>
-
     <h1>My Tasks</h1>
     <div class="bg"></div>
-    <input type="text" id="task-input" placeholder="Add a task...">
+
+    <input type="text" id="task-input" placeholder="Add a task..." />
     <div class="btn-group">
         <button id="add-btn">Add Task</button>
-        <!--<input type="datetime-local" id="task-time" class="date-input" placeholder="Set time for notification">-->
         <button id="delete-all-btn">Delete All</button>
+        <button id="delete-done-btn">Delete Done</button>
     </div>
+
     <ul id="task-list"></ul>
+
     <div id="complete-msg">All tasks completed!</div>
-    <div class="space" style="margin: 15vh;"></div>
+    
+    <!-- Confirm Delete All Dialog -->
+    <div class="confirm-delete" id="confirm-delete">
+        <div>
+            <p>Are you sure you want to delete all tasks?</p>
+            <button id="confirm-delete-btn">Yes, Delete</button>
+            <button id="cancel-delete-btn">Cancel</button>
+        </div>
+    </div>
 
     <script>
         const taskInput = document.getElementById('task-input');
         const addBtn = document.getElementById('add-btn');
         const deleteAllBtn = document.getElementById('delete-all-btn');
+        const deleteDoneBtn = document.getElementById('delete-done-btn');
         const taskList = document.getElementById('task-list');
         const completeMsg = document.getElementById('complete-msg');
+        const confirmDelete = document.getElementById('confirm-delete');
+        const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+        const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
 
         document.addEventListener('DOMContentLoaded', loadTasks);
         addBtn.addEventListener('click', addTask);
-        deleteAllBtn.addEventListener('click', deleteAllTasks);
+        deleteAllBtn.addEventListener('click', showDeleteAllConfirm);
+        deleteDoneBtn.addEventListener('click', deleteDoneTasks);
+        cancelDeleteBtn.addEventListener('click', () => confirmDelete.style.display = 'none');
+
         taskList.addEventListener('change', checkTasks);
+        taskList.addEventListener('click', deleteTask);
 
-        // Load tasks from localStorage
-function loadTasks() {
-    taskList.innerHTML = '';  // Clear the task list before loading
-    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    storedTasks.forEach(task => {
-        createTaskElement(task.text, task.completed);
-    });
-    checkTasks();  // Recheck the tasks to see if all are completed
-}
+        function loadTasks() {
+            taskList.innerHTML = '';
+            const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            storedTasks.forEach(task => {
+                createTaskElement(task.text, task.completed);
+            });
+            checkTasks();
+        }
 
-
-        // Save tasks to localStorage
         function saveTasks() {
             const tasks = [];
             document.querySelectorAll('#task-list li').forEach(li => {
@@ -277,23 +256,16 @@ function loadTasks() {
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
 
-    // Add a new task
-function addTask() {
-    const taskText = taskInput.value.trim();
-    if (taskText === '') return;
-    createTaskElement(taskText, false);
-    saveTasks();
-    taskInput.value = '';
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === '') return;
 
-    // Scroll to the bottom when a new task is added
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth' // Smooth scrolling effect
-    });
-}
+            createTaskElement(taskText, false);
+            saveTasks();
+            taskInput.value = '';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
 
-
-        // Create task list element
         function createTaskElement(text, completed) {
             const li = document.createElement('li');
             const checkbox = document.createElement('input');
@@ -303,12 +275,16 @@ function addTask() {
             span.textContent = text;
             if (completed) span.classList.add('complete');
 
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('task-delete-btn');
+            deleteBtn.textContent = 'X';
+
             li.appendChild(checkbox);
             li.appendChild(span);
+            li.appendChild(deleteBtn);
             taskList.appendChild(li);
         }
 
-        // Check if all tasks are completed
         function checkTasks() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
@@ -327,72 +303,39 @@ function addTask() {
             } else {
                 completeMsg.style.display = 'none';
             }
-            saveTasks();  // Save tasks' status whenever a change happens
+
+            saveTasks();
         }
 
-        // Delete all tasks
+        function showDeleteAllConfirm() {
+            confirmDelete.style.display = 'flex';
+        }
+
+        confirmDeleteBtn.addEventListener('click', () => {
+            deleteAllTasks();
+            confirmDelete.style.display = 'none';
+        });
+
         function deleteAllTasks() {
-            taskList.innerHTML = '';  // Clear task list from the DOM
-            localStorage.removeItem('tasks');  // Remove tasks from localStorage
-            completeMsg.style.display = 'none';  // Hide complete message if visible
+            taskList.innerHTML = '';
+            localStorage.removeItem('tasks');
+            completeMsg.style.display = 'none';
+        }
+
+        function deleteDoneTasks() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => {
+                checkbox.parentElement.remove();
+            });
+            saveTasks();
+        }
+
+        function deleteTask(e) {
+            if (e.target.classList.contains('task-delete-btn')) {
+                e.target.parentElement.remove();
+                saveTasks();
+            }
         }
     </script>
-
-<script>
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 128) {
-        document.body.classList.add('scrolled');
-    } else {
-        document.body.classList.remove('scrolled');
-    }
-});
-
-</script>
-
-<script>
-    addBtn.addEventListener('click', addTask);
-
-function addTask() {
-    const taskText = taskInput.value.trim();
-    const taskTime = document.getElementById('task-time').value;
-
-    if (taskText === '' || taskTime === '') return;
-
-    createTaskElement(taskText, false);
-
-    const notificationTime = new Date(taskTime).getTime() - Date.now();
-    
-    // Schedule the notification
-    if (notificationTime > 0) {
-        setTimeout(() => {
-            sendNotification(taskText);
-        }, notificationTime);
-    }
-
-    saveTasks();
-    taskInput.value = '';
-    document.getElementById('task-time').value = ''; // Clear input
-}
-
-// Request Notification permission and show notification
-function sendNotification(task) {
-    if (Notification.permission === 'granted') {
-        navigator.serviceWorker.ready.then(function(registration) {
-            registration.showNotification('Task Reminder', {
-                body: `Don't forget: ${task}`,
-                icon: 'icon.png',
-                badge: 'badge.png'
-            });
-        });
-    } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
-                sendNotification(task);
-            }
-        });
-    }
-}
-
-</script>
 </body>
 </html>
