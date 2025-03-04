@@ -211,6 +211,9 @@
     </div>
 
     <ul id="task-list"></ul>
+    <h2>Timeline</h2>
+<ul id="timeline-list"></ul>
+
 
     <div id="complete-msg">All tasks completed!</div>
 
@@ -233,6 +236,8 @@
         const confirmDelete = document.getElementById('confirm-delete');
         const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
         const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+        const timelineList = document.getElementById("timeline-list");
+
 
         document.addEventListener('DOMContentLoaded', loadTasks);
         addBtn.addEventListener('click', addTask);
@@ -342,6 +347,89 @@
                 saveTasks();
             }
         }
+        document.addEventListener('DOMContentLoaded', loadTasks);
+taskList.addEventListener('click', handleTaskActions);
+
+function createTaskElement(text, completed) {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = completed;
+
+    const span = document.createElement('span');
+    span.textContent = text;
+    highlightTimestamps(span);
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.classList.add('edit-btn');
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'X';
+    deleteBtn.classList.add('task-delete-btn');
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(editBtn);
+    li.appendChild(deleteBtn);
+    taskList.appendChild(li);
+}
+
+function handleTaskActions(e) {
+    if (e.target.classList.contains('task-delete-btn')) {
+        e.target.parentElement.remove();
+        saveTasks();
+        updateTimeline();
+    } else if (e.target.classList.contains('edit-btn')) {
+        editTask(e.target);
+    }
+}
+
+function editTask(editBtn) {
+    const span = editBtn.previousElementSibling;
+    const oldText = span.textContent;
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = oldText;
+    span.replaceWith(input);
+    input.focus();
+
+    input.addEventListener('blur', () => {
+        span.textContent = input.value;
+        highlightTimestamps(span);
+        input.replaceWith(span);
+        saveTasks();
+        updateTimeline();
+    });
+
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            input.blur();
+        }
+    });
+}
+
+function highlightTimestamps(span) {
+    const regex = /\b\d{1,2}:\d{2} [ap]m\b/g;
+    span.innerHTML = span.textContent.replace(regex, match => `<strong>${match}</strong>`);
+}
+
+function updateTimeline() {
+    timelineList.innerHTML = '';
+    const tasks = [...document.querySelectorAll('#task-list li span')];
+    const timestampTasks = tasks
+        .map(span => span.textContent.match(/\b\d{1,2}:\d{2} [ap]m\b/g))
+        .filter(Boolean)
+        .flat()
+        .sort((a, b) => new Date(`01/01/2000 ${a}`) - new Date(`01/01/2000 ${b}`));
+
+    timestampTasks.forEach(time => {
+        const li = document.createElement('li');
+        li.textContent = time;
+        timelineList.appendChild(li);
+    });
+}
+
     </script>
 </body>
 
